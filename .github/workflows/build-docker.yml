@@ -10,11 +10,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Build Docker backend image
         run: docker build ./api/ -t nsawatz/devops-qr-code-api:latest
+
+      - name: Build Docker frontend image
+        run: docker build ./front-end-nextjs/ -t nsawatz/devops-qr-code-frontend:latest
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u nsawatz --password-stdin
 
-      - name: Push Docker image to Docker Hub
+      - name: Push Docker api image to Docker Hub
         run: docker push nsawatz/devops-qr-code-api:latest
+
+      - name: Push Docker frontend image to Docker Hub
+        run: docker push nsawatz/devops-qr-code-frontend:latest
