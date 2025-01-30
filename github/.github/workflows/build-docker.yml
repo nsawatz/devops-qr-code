@@ -13,4 +13,3 @@ jobs:
       - name: push image to docker hub
         run:
           docker push nsawatz/devops-qr-code-api:latest
-
