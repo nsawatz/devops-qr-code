@@ -1,16 +1,20 @@
 name: Build and Publish image to Docker Hub
+
 on:
-  [workflow_dispatch]
+  workflow_dispatch
 
 jobs:
   publish_images:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: build image
+
+      - name: Build Docker image
         run: docker build ./api/ -t nsawatz/devops-qr-code-api:latest
-      - name: push image to docker hub
-        run:
-            docker login -u nsawatz -p ${{ secrets.DOCKER_HUB_TOKEN }}
-            docker push nsawatz/devops-qr-code-api:latest
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u nsawatz --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker push nsawatz/devops-qr-code-api:latest
