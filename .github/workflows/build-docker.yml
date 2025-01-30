@@ -12,5 +12,5 @@ jobs:
         run: docker build ./api/ -t nsawatz/devops-qr-code-api:latest
       - name: push image to docker hub
         run:
-          docker login -u nsawatz -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push nsawatz/devops-qr-code-api:latest
+            docker login -u nsawatz -p ${{ secrets.DOCKER_HUB_TOKEN }}
+            docker push nsawatz/devops-qr-code-api:latest
